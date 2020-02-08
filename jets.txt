@@ -1,0 +1,5 @@
+FighterJet, F-16, 100, 500, 1000000
+FighterJet, F-15, 200, 600, 2000000
+CargoPlane, C-5, 500, 300, 5000000
+CargoPlane, C-17, 300, 400, 4000000
+JetImpl, 757, 400, 200, 6000000
