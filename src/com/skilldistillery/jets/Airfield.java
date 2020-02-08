@@ -72,7 +72,7 @@ public class Airfield {
 	}
 
 	public void addJet() {
-		System.out.println("What type of plane would you like to add to your airfield?");
+		System.out.println("What type of jet would you like to add to your airfield?");
 		System.out.println("1. Fighter Jet");
 		System.out.println("2. Cargo Plane");
 		System.out.println("3. Passenger Jet");

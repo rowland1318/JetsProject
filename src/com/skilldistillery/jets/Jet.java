@@ -24,9 +24,11 @@ public abstract class Jet {
 		System.out.println(this.getModel() + " is flying with " + flightFormulaFormat + " hours left");
 	};
 	
-	public double getSpeedinMach() {
-		return price;
-//		return mach;
+	public String getSpeedinMach() {
+		DecimalFormat df = new DecimalFormat("#.###");
+		double machSpeed = speed / 767;
+		String machSpeedFormat = df.format(machSpeed);
+		return machSpeedFormat;
 	}
 
 	public String getModel() {
@@ -63,7 +65,7 @@ public abstract class Jet {
 
 	@Override
 	public String toString() {
-		return "Model: " + model + ", Speed: " + speed + ", Range: " + range + ", Price: " + price ;
+		return "Model: " + model + ", Speed: " + speed + ", Mach Speed" + getSpeedinMach() + ", Range: " + range + ", Price: " + price;
 	}
 
 	@Override
