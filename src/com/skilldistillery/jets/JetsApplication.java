@@ -5,8 +5,12 @@ import java.util.Scanner;
 
 public class JetsApplication {
 	
+	// F I E L D S
+	
 	private Airfield airfield = new Airfield();
 	private Scanner kb = new Scanner(System.in);
+	
+	// M E T H O D S
 
 	public static void main(String[] args) {
 		JetsApplication jetApp = new JetsApplication();

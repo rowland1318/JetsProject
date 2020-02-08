@@ -14,7 +14,7 @@ public class CargoPlane extends Jet implements CargoCarrier {
 
 	@Override
 	public String loadCargo() {
-		return "Loading Cargo";
+		return "Loading Cargo. . .";
 	}
 
 }

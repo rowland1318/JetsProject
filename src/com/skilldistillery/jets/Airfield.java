@@ -10,9 +10,13 @@ import java.util.List;
 import java.util.Scanner;
 
 public class Airfield {
+	
+	// F I E L D S
 
 	private List<Jet> jet = new ArrayList<>();
 	private Scanner kb = new Scanner(System.in);
+	
+	// M E T H O D S
 
 	public Airfield() {
 		readAndPopulateFromFile();
@@ -91,15 +95,19 @@ public class Airfield {
 
 		for (Iterator<Jet> iterator = jet.iterator(); iterator.hasNext();) {
 			Jet jet2 = iterator.next();
-			if (planeType == 1) {
+			
+			switch(planeType) {
+			case 1:
 				jet2 = new FighterJet(model, speed, range, price);
 				jet.add(jet2);
 				break;
-			} else if (planeType == 2) {
+			
+			case 2:
 				jet2 = new CargoPlane(model, speed, range, price);
 				jet.add(jet2);
 				break;
-			}else if (planeType == 3) {
+				
+			case 3:
 				jet2 = new JetImpl(model, speed, range, price);
 				jet.add(jet2);
 				break;

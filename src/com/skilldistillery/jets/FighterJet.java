@@ -14,7 +14,7 @@ public class FighterJet extends Jet implements CombatReady {
 
 	@Override
 	public String fight() {
-		return "Ready to fight";
+		return "Ready to fight!";
 	}
 
 }
