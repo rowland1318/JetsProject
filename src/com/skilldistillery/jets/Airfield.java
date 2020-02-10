@@ -17,19 +17,19 @@ public class Airfield {
 	}
 
 	public void menuPrint() {
-		System.out.println("+--------------------------------+");
-		System.out.println("|         Jets Main Menu         |");
-		System.out.println("|       ------------------       |");
-		System.out.println("|        1: List Fleet           |");
-		System.out.println("|       2. Fly All Jets          |");
-		System.out.println("|      3: View Fastest Jet       |");
-		System.out.println("| 4. View Jet with Longest Range |");         
-		System.out.println("|     5: Load all Cargo Jets     |");
-		System.out.println("|          6. Dogfight!          |");
-		System.out.println("|     7. Add a Jet to Fleet      |");
-		System.out.println("|   8. Remove a Jet From Fleet   |");
-		System.out.println("|           9: Quit              |");
-		System.out.println("+--------------------------------+");
+		System.out.println("+---------------------------------+");
+		System.out.println("|          Jets Main Menu         |");
+		System.out.println("|        ------------------       |");
+		System.out.println("|         1: List Fleet           |");
+		System.out.println("|        2. Fly All Jets          |");
+		System.out.println("|       3: View Fastest Jet       |");
+		System.out.println("|  4. View Jet with Longest Range |");         
+		System.out.println("|      5: Load All Cargo Jets     |");
+		System.out.println("|           6. Dogfight!          |");
+		System.out.println("|    7. Add a Jet to Your Fleet   |");
+		System.out.println("| 8. Remove a Jet From Your Fleet |");
+		System.out.println("|            9: Quit              |");
+		System.out.println("+---------------------------------+");
 	}
 	
 	public void displayJets() { //CASE 1
@@ -92,7 +92,7 @@ public class Airfield {
 	}
 
 	public void addJet() { //CASE 7
-		System.out.println("What type of jet would you like to add to your airfield?");
+		System.out.println("Please Type the Number Associated With the Type of Jet That You Would Like to Add to Your Fleet: ");
 		System.out.println("1. Fighter Jet");
 		System.out.println("2. Cargo Plane");
 		System.out.println("3. Passenger Jet");
@@ -100,28 +100,28 @@ public class Airfield {
 
 		int planeType = kb.nextInt();		
 		kb.nextLine();
-		System.out.print("Enter the model of the Jet: ");
+		System.out.print("Enter the Model of the Jet: ");
 		String model = kb.nextLine();
-		System.out.print("Enter the top speed of the Jet: ");
+		System.out.print("Enter the Top Speed of the Jet: ");
 		double speed = kb.nextDouble();
-		System.out.print("Enter the range of the Jet: ");
+		System.out.print("Enter the Maximum Range of the Jet: ");
 		int range = kb.nextInt();
-		System.out.print("Enter the price of the Jet: ");
+		System.out.print("Enter the Price of the Jet: ");
 		long price = kb.nextLong();
 		kb.nextLine();
 
 			if (planeType == 1) {
 				FighterJet fighterJet = new FighterJet(model, speed, range, price);
 				jet.add(fighterJet);
-				System.out.println("You have added a " + fighterJet.getModel() + " " + fighterJet.getClass().getSimpleName() + " to your Airfield.");
+				System.out.println("You have added a " + fighterJet.getModel() + " " + fighterJet.getClass().getSimpleName() + " to your Fleet.");
 			} else if (planeType == 2) {
 				CargoPlane cargoPlane = new CargoPlane(model, speed, range, price);
 				jet.add(cargoPlane);
-				System.out.println("You have added a " + cargoPlane.getModel() + " " +cargoPlane.getClass().getSimpleName() + " to your Airfield.");
+				System.out.println("You have added a " + cargoPlane.getModel() + " " +cargoPlane.getClass().getSimpleName() + " to your Fleet.");
 			} else if (planeType == 3) {
 				PassengerJet jetImpl = new PassengerJet(model, speed, range, price);
 				jet.add(jetImpl);
-				System.out.println("You have added a " + jetImpl.getModel() + " " + jetImpl.getClass().getSimpleName() + " to your Airfield.");
+				System.out.println("You have added a " + jetImpl.getModel() + " " + jetImpl.getClass().getSimpleName() + " to your Fleet.");
 			} else {
 				System.out.println("Number Was Not Recognized for Jet Selection! Jet Was Not Added!");
 			}
@@ -132,14 +132,14 @@ public class Airfield {
 	
 
 	public void removeJet() { //CASE 8
-		System.out.println("Please select the number associated with the jet that you would like to remove: ");
+		System.out.println("Please Select the Number Associated With the Jet That You Would Like to Remove: ");
 		for (int index = 0; index < jet.size(); index++) {
 			System.out.println((index + 1) + ". " + jet.get(index));
 		}
 
 		int userInput = kb.nextInt();
 		Jet removedJet = jet.remove(userInput - 1);
-		System.out.println(removedJet.getModel() + " " + "was removed");
+		System.out.println(removedJet.getModel() + " was removed");
 	}
 
 	public List<Jet> readAndPopulateFromFile() { // reading file jets.txt to populate array list
