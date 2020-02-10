@@ -10,12 +10,12 @@ import java.util.List;
 import java.util.Scanner;
 
 public class Airfield {
-	
+
 	// F I E L D S
 
 	private List<Jet> jet = new ArrayList<>();
 	private Scanner kb = new Scanner(System.in);
-	
+
 	// M E T H O D S
 
 	public Airfield() {
@@ -81,51 +81,56 @@ public class Airfield {
 		System.out.println("2. Cargo Plane");
 		System.out.println("3. Passenger Jet");
 		
+
 		int planeType = kb.nextInt();
+//		if (planeType < 1 || planeType >3){
+//			System.out.println("Number Not Recognized! Please Select a Menu Item Between 1 and 3:");
+//		}
+		
 		kb.nextLine();
 		System.out.print("Enter the model of the Jet: ");
 		String model = kb.nextLine();
 		System.out.print("Enter the top speed of the Jet: ");
 		double speed = kb.nextDouble();
-		System.out.print("Enter the range: ");
+		System.out.print("Enter the range of the Jet: ");
 		int range = kb.nextInt();
-		System.out.print("Enter the price of the Jet");
+		System.out.print("Enter the price of the Jet: ");
 		long price = kb.nextLong();
 		kb.nextLine();
 
-		for (Iterator<Jet> iterator = jet.iterator(); iterator.hasNext();) {
-			Jet jet2 = iterator.next();
-			
-			switch(planeType) {
-			case 1:
-				jet2 = new FighterJet(model, speed, range, price);
-				jet.add(jet2);
-				break;
-			
-			case 2:
-				jet2 = new CargoPlane(model, speed, range, price);
-				jet.add(jet2);
-				break;
-				
-			case 3:
-				jet2 = new JetImpl(model, speed, range, price);
-				jet.add(jet2);
-				break;
+//		if (!fault) {
+
+			if (planeType == 1) {
+				FighterJet fighterJet = new FighterJet(model, speed, range, price);
+				jet.add(fighterJet);
+				System.out.println("You have added a " + fighterJet.getModel() + " " + fighterJet.getClass().getSimpleName() + " to your Airfield.");
+			} else if (planeType == 2) {
+				CargoPlane cargoPlane = new CargoPlane(model, speed, range, price);
+				jet.add(cargoPlane);
+				System.out.println("You have added a " + cargoPlane.getModel() + " " +cargoPlane.getClass().getSimpleName() + " to your Airfield.");
+			} else if (planeType == 3) {
+				JetImpl jetImpl = new JetImpl(model, speed, range, price);
+				jet.add(jetImpl);
+				System.out.println("You have added a " + jetImpl.getModel() + " " + jetImpl.getClass().getSimpleName() + " to your Airfield.");
+			} else {
+				System.out.println("Number Was Not Recognized for Jet Selection! Jet Was Not Added!");
 			}
 		}
-	}
-
+		
+//		
+//		}
+	
 
 	public void removeJet() {
 
 		System.out.println("Please select the number associated with the jet that you would like to remove: ");
 		for (int index = 0; index < jet.size(); index++) {
-		System.out.println((index + 1) + ". " + jet.get(index));	
+			System.out.println((index + 1) + ". " + jet.get(index));
 		}
-		
+
 		int userInput = kb.nextInt();
-		jet.remove(userInput-1);
-		System.out.println(userInput + " was removed");
+		Jet removedJet = jet.remove(userInput - 1);
+		System.out.println(removedJet.getModel() + " " + "was removed");
 	}
 
 	public List<Jet> readAndPopulateFromFile() {
@@ -147,7 +152,7 @@ public class Airfield {
 				} else if (type.contentEquals("JetImpl")) {
 					jet.add(new JetImpl(model, speed, range, price));
 				} else {
-					System.out.println("UNKNOWN TYPE/DATA ERROR"); // change to error
+					System.out.println("Unknown type of Jet"); // change to error
 				}
 			}
 			br.close();
