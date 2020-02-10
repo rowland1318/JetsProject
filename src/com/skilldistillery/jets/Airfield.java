@@ -1,13 +1,7 @@
 package com.skilldistillery.jets;
 
-import java.io.BufferedReader;
-import java.io.FileNotFoundException;
-import java.io.FileReader;
-import java.io.IOException;
-import java.util.ArrayList;
-import java.util.Iterator;
-import java.util.List;
-import java.util.Scanner;
+import java.io.*;
+import java.util.*;
 
 public class Airfield {
 
@@ -22,13 +16,35 @@ public class Airfield {
 		readAndPopulateFromFile();
 	}
 
-	public void flyAllJets() {
+	public void menuPrint() {
+		System.out.println("+--------------------------------+");
+		System.out.println("|         Jets Main Menu         |");
+		System.out.println("|       ------------------       |");
+		System.out.println("|        1: List Fleet           |");
+		System.out.println("|       2. Fly All Jets          |");
+		System.out.println("|      3: View Fastest Jet       |");
+		System.out.println("| 4. View Jet with Longest Range |");         
+		System.out.println("|     5: Load all Cargo Jets     |");
+		System.out.println("|          6. Dogfight!          |");
+		System.out.println("|     7. Add a Jet to Fleet      |");
+		System.out.println("|   8. Remove a Jet From Fleet   |");
+		System.out.println("|           9: Quit              |");
+		System.out.println("+--------------------------------+");
+	}
+	
+	public void displayJets() { //CASE 1
+		for (Jet jetPlane : jet) {
+			System.out.println(jetPlane);
+		}
+	}
+	
+	public void flyAllJets() { //CASE 2
 		for (Jet jetFly : jet) {
 			jetFly.fly();
 		}
 	}
 
-	public String viewFastestJet() {
+	public String viewFastestJet() { //CASE 3
 		double currentSpeed = Double.MIN_VALUE;
 		String fastest = null;
 		for (Jet jetFast : jet) {
@@ -41,7 +57,7 @@ public class Airfield {
 		return fastest;
 	}
 
-	public String viewLongestRange() {
+	public String viewLongestRange() { //CASE 4
 		double currentRange = Double.MIN_VALUE;
 		String longest = null;
 		for (Jet jetLong : jet) {
@@ -54,7 +70,7 @@ public class Airfield {
 		return longest;
 	}
 
-	public void loadCargoPlanes() {
+	public void loadCargoPlanes() { //CASE 5
 		for (Jet currentJet : jet) {
 			if (currentJet instanceof CargoPlane) {
 				CargoPlane planeWithCargo = ((CargoPlane) currentJet);
@@ -64,7 +80,7 @@ public class Airfield {
 		}
 	}
 
-	public void dogFight() {
+	public void dogFight() { //CASE 6
 		for (Jet currentJet : jet) {
 			if (currentJet instanceof FighterJet) {
 				FighterJet planeCanFight = ((FighterJet) currentJet);
@@ -75,18 +91,14 @@ public class Airfield {
 		}
 	}
 
-	public void addJet() {
+	public void addJet() { //CASE 7
 		System.out.println("What type of jet would you like to add to your airfield?");
 		System.out.println("1. Fighter Jet");
 		System.out.println("2. Cargo Plane");
 		System.out.println("3. Passenger Jet");
 		
 
-		int planeType = kb.nextInt();
-//		if (planeType < 1 || planeType >3){
-//			System.out.println("Number Not Recognized! Please Select a Menu Item Between 1 and 3:");
-//		}
-		
+		int planeType = kb.nextInt();		
 		kb.nextLine();
 		System.out.print("Enter the model of the Jet: ");
 		String model = kb.nextLine();
@@ -98,8 +110,6 @@ public class Airfield {
 		long price = kb.nextLong();
 		kb.nextLine();
 
-//		if (!fault) {
-
 			if (planeType == 1) {
 				FighterJet fighterJet = new FighterJet(model, speed, range, price);
 				jet.add(fighterJet);
@@ -109,7 +119,7 @@ public class Airfield {
 				jet.add(cargoPlane);
 				System.out.println("You have added a " + cargoPlane.getModel() + " " +cargoPlane.getClass().getSimpleName() + " to your Airfield.");
 			} else if (planeType == 3) {
-				JetImpl jetImpl = new JetImpl(model, speed, range, price);
+				PassengerJet jetImpl = new PassengerJet(model, speed, range, price);
 				jet.add(jetImpl);
 				System.out.println("You have added a " + jetImpl.getModel() + " " + jetImpl.getClass().getSimpleName() + " to your Airfield.");
 			} else {
@@ -121,8 +131,7 @@ public class Airfield {
 //		}
 	
 
-	public void removeJet() {
-
+	public void removeJet() { //CASE 8
 		System.out.println("Please select the number associated with the jet that you would like to remove: ");
 		for (int index = 0; index < jet.size(); index++) {
 			System.out.println((index + 1) + ". " + jet.get(index));
@@ -133,7 +142,7 @@ public class Airfield {
 		System.out.println(removedJet.getModel() + " " + "was removed");
 	}
 
-	public List<Jet> readAndPopulateFromFile() {
+	public List<Jet> readAndPopulateFromFile() { // reading file jets.txt to populate array list
 		try {
 			FileReader fr = new FileReader("jets.txt");
 			BufferedReader br = new BufferedReader(fr);
@@ -149,25 +158,18 @@ public class Airfield {
 					jet.add(new FighterJet(model, speed, range, price));
 				} else if (type.contentEquals("CargoPlane")) {
 					jet.add(new CargoPlane(model, speed, range, price));
-				} else if (type.contentEquals("JetImpl")) {
-					jet.add(new JetImpl(model, speed, range, price));
+				} else if (type.contentEquals("PassengerJet")) {
+					jet.add(new PassengerJet(model, speed, range, price));
 				} else {
-					System.out.println("Unknown type of Jet"); // change to error
+					System.out.println("Unknown Type of Jet"); 
 				}
 			}
 			br.close();
 		} catch (FileNotFoundException e) {
-			System.err.println("Invalid filename: " + e.getMessage());
+			System.err.println("Invalid Filename: " + e.getMessage());
 		} catch (IOException e) {
-			System.err.println("Problem while reading " + "jets.txt" + ": " + e.getMessage());
+			System.err.println("Problem While Reading " + "jets.txt" + ": " + e.getMessage());
 		}
 		return jet;
 	}
-
-	public void displayJets() {
-		for (Jet jetPlane : jet) {
-			System.out.println(jetPlane);
-		}
-	}
-
 }

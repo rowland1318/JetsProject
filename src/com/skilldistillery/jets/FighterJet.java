@@ -10,7 +10,7 @@ public class FighterJet extends Jet implements CombatReady {
 	@Override
 	public String toString() {
 		return "Fighter Jet: " + super.toString();
-	}
+	} // toString helps display the type of jet
 
 	@Override
 	public String fight() {

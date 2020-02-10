@@ -3,27 +3,29 @@ package com.skilldistillery.jets;
 import java.text.DecimalFormat;
 
 public abstract class Jet {
+
+	// F I E L D S
 	private String model;
 	private double speed;
 	private int range;
 	private long price;
 
-	
-	
+	// C O N S T R U C T O R
 	public Jet(String model, double speed, int range, long price) {
 		this.model = model;
 		this.speed = speed;
 		this.range = range;
 		this.price = price;
 	}
-	
+
+	// M E T H O D S
 	public void fly() {
 		DecimalFormat df = new DecimalFormat("#.##");
 		double flightFormula = range / speed;
 		String flightFormulaFormat = df.format(flightFormula);
 		System.out.println(this.getModel() + " is flying with " + flightFormulaFormat + " hours left");
 	};
-	
+
 	public String getSpeedinMach() {
 		DecimalFormat df = new DecimalFormat("#.###");
 		double machSpeed = speed / 767;
@@ -31,6 +33,7 @@ public abstract class Jet {
 		return machSpeedFormat;
 	}
 
+	// G E T T E R S  &  S E T T E R S
 	public String getModel() {
 		return model;
 	}
@@ -63,11 +66,14 @@ public abstract class Jet {
 		this.price = price;
 	}
 
+	// T O  S T R I N G
 	@Override
 	public String toString() {
-		return "Model: " + model + ", Speed: " + speed + ", Mach Speed: " + getSpeedinMach() + ", Range: " + range + ", Price: " + price;
+		return "Model: " + model + ", Speed: " + speed + ", Mach Speed: " + getSpeedinMach() + ", Range: " + range
+				+ ", Price: " + price;
 	}
 
+	// H A S H C O D E  &  E Q U A L S
 	@Override
 	public int hashCode() {
 		final int prime = 31;
@@ -102,10 +108,6 @@ public abstract class Jet {
 		if (Double.doubleToLongBits(speed) != Double.doubleToLongBits(other.speed))
 			return false;
 		return true;
-	} 
+	}
 
-	
-	
-	
-	
 }

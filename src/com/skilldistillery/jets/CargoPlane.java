@@ -10,7 +10,7 @@ public class CargoPlane extends Jet implements CargoCarrier {
 	@Override
 	public String toString() {
 		return "Cargo Plane: " + super.toString();
-	}
+	} // toString helps display the type of jet
 
 	@Override
 	public String loadCargo() {
